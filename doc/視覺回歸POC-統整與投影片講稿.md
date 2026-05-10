@@ -21,14 +21,16 @@
 
 ### 4. 核心交付物
 
-| 類別 | 內容 |
-|------|------|
-| **SDK** | `takeSnapshot(page, name)`：PNG + 含 rect / computedStyle（白名單）的 JSON |
-| **設定** | `vrt.config.ts`：viewports、`excludeSelectors`（截圖隱藏 + 序列化略過）、`computedStyleProps`、`diffThreshold` |
-| **引擎** | 影像 diff、連通分量聚類、xpath 對齊的 coord diff、區塊與 DOM IoU／深度排序的根因指派 |
-| **報告** | 左右對照、Current 側可點紅框、Root Cause Analysis（HTML／Styles／Box Model）、鍵盤 ← → 巡覽區塊 |
-| **CLI** | `vrt capture`、`vrt compare`、`vrt approve` |
-| **示範** | `demo/v1` vs `demo/v2`；`pnpm demo` 一鍵跑通 |
+
+| 類別      | 內容                                                                                              |
+| ------- | ----------------------------------------------------------------------------------------------- |
+| **SDK** | `takeSnapshot(page, name)`：PNG + 含 rect / computedStyle（白名單）的 JSON                              |
+| **設定**  | `vrt.config.ts`：viewports、`excludeSelectors`（截圖隱藏 + 序列化略過）、`computedStyleProps`、`diffThreshold` |
+| **引擎**  | 影像 diff、連通分量聚類、xpath 對齊的 coord diff、區塊與 DOM IoU／深度排序的根因指派                                       |
+| **報告**  | 左右對照、Current 側可點紅框、Root Cause Analysis（HTML／Styles／Box Model）、鍵盤 ← → 巡覽區塊                       |
+| **CLI** | `vrt capture`、`vrt compare`、`vrt approve`                                                       |
+| **示範**  | `demo/v1` vs `demo/v2`；`pnpm demo` 一鍵跑通                                                         |
+
 
 ### 5. 兩天的刻意範圍（Scope）
 
@@ -84,8 +86,8 @@
 
 流程上分三段：
 
-1. **擷取**：測試裡呼叫 `takeSnapshot`，同時輸出截圖和一份結構化 DOM 資料。  
-2. **比對**：用 **odiff** 對 baseline 與 current 算像素差並產生 mask；我們再將像素聚類成「人類可理解的紅框區塊」。  
+1. **擷取**：測試裡呼叫 `takeSnapshot`，同時輸出截圖和一份結構化 DOM 資料。
+2. **比對**：用 **odiff** 對 baseline 與 current 算像素差並產生 mask；我們再將像素聚類成「人類可理解的紅框區塊」。
 3. **呈現**：把所有結果寫進 **一份可離線開啟的報告**，點區塊就更新下方的根因面板。
 
 全程**不需要資料庫、不需要長駐伺服器**。
@@ -99,21 +101,21 @@
 具體包括：
 
 - 測試端 **SDK**：一行程式就能存 baseline 或 current。  
-- **`vrt` CLI**：統一進入 capture、compare、approve。  
-- **`vrt.config.ts`**：viewport、忽略的選擇器、要比對哪些 computed style、敏感度門檻。  
-- **`demo/v1` 與 `v2`** 兩版靜態頁加上 `pnpm demo` **一鍵跑完** 的腳本。  
+- `**vrt` CLI**：統一進入 capture、compare、approve。  
+- `**vrt.config.ts`**：viewport、忽略的選擇器、要比對哪些 computed style、敏感度門檻。  
+- `**demo/v1` 與 `v2`** 兩版靜態頁加上 `pnpm demo` **一鍵跑完** 的腳本。  
 - **README（英文深度）** 與 **TUTORIAL（中文步驟）**，方便接班人上手。
 
 ---
 
 ### 投影片 5｜開發者怎么用（現場 Demo 可走這段）
 
-**流程**：**baseline capture** → 改程式 → **current capture** → **`vrt compare`**  
-**核准**：`**vrt approve**` 升級基準線
+**流程**：**baseline capture** → 改程式 → **current capture** → `**vrt compare`**  
+**核准**：`**vrt approve`** 升級基準線
 
 對開發者來說，工作流很像業界常見作法：
 
-改版前先跑 **`vrt capture --target baseline`**，改完後跑 **current**，接著 **`compare`** 出報告。若確認變更是預期的，可用 **`approve`** 把 current 升格成新的 baseline。
+改版前先跑 `**vrt capture --target baseline`**，改完後跑 **current**，接著 `**compare`** 出報告。若確認變更是預期的，可用 `**approve`** 把 current 升格成新的 baseline。
 
 內建的 demo 則是先跑 v1、再跑 v2，直接看到顏色與元件上的差異出現在報告裡——適合對非技術聽眾做 **30 秒 live demo**。
 
@@ -127,7 +129,7 @@
 
 - Baseline 與 Current **並列**；Current 上有 **可多選的 diff 區塊**。  
 - 下方 **Root Cause Analysis** 分三欄：**HTML 定位**（selector、XPath、一鍵複製）、**樣式差異**（紅刪綠加）、**盒模型數字**。  
-- 支援 **`←`** **`→`** 在區塊間切換，方便簡報或 code review 時口述「第幾塊問題」。
+- 支援 `**←`** `**→`** 在區塊間切換，方便簡報或 code review 時口述「第幾塊問題」。
 
 重點是：**從像素回到元素與計算後樣式**，減少「只看到兩張圖不一樣但不知道該改哪個 class」的情況。
 
@@ -146,8 +148,8 @@
 
 ### 投影片 8｜噪音與穩定性
 
-**降噪**：`**excludeSelectors**`——**CSS 隱藏** + **序列化省略**  
-**門檻**：`**diffThreshold**`／**computedStyle 白名單**
+**降噪**：`**excludeSelectors`**——CSS 隱藏 + 序列化省略**  
+**門檻：`**diffThreshold`**／**computedStyle 白名單**
 
 鐘錶、輪播、動畫區我們用 **雙重保險**：截圖前把它們設成不可見，序列化時也跳過，避免既干擾像素又製造無意義 style diff。
 
@@ -180,8 +182,8 @@
 
 若是企業級 rollout，建議優先順序為：
 
-1. **在 CI 產報告並存 artifact**，讓 MR 可追溯。  
-2. **baseline 核准流程**誰能做、是否要分環境。  
+1. **在 CI 產報告並存 artifact**，讓 MR 可追溯。
+2. **baseline 核准流程**誰能做、是否要分環境。
 3. **不穩定測試**與動態區的治理（繼續擴充 `excludeSelectors` 與資料屬性約定）。
 
 若評估後傾向外購 Percy／Chromatic，本 POC **仍可保留技術評估**：我們已理解 **pixel mask 與 DOM 交叉分析** 的複雜度與上限。
@@ -195,8 +197,8 @@
 
 總結三點：
 
-1. 管線打通，且報告 **離線可用**。  
-2. **RCA** 對開發者有實質幫助，但需在複雜度上升時配以流程與工程治理。  
+1. 管線打通，且報告 **離線可用**。
+2. **RCA** 對開發者有實質幫助，但需在複雜度上升時配以流程與工程治理。
 3. 接下來已不是「能不能做」，而是 **「要花多少成本做到可持續營運」**。
 
 謝謝，歡迎提問。
@@ -207,25 +209,27 @@
 
 若現場有可執行環境，建議順序：
 
-1. 「這是改動前的 v1——我們已寫進 baseline。」  
-2. 「改動後的 v2 寫進 current，`pnpm vrt compare`。」  
-3. 打開報告：指出 **diff 百分比／區塊數**。  
-4. 點一個 **紅框**，唸出 RCA：哪個選擇器、哪個 `backgroundColor` 從什麼變什麼。  
-5. 按 **`→`** 切到下一個區塊，強調「**不用自己找座標**」。  
+1. 「這是改動前的 v1——我們已寫進 baseline。」
+2. 「改動後的 v2 寫進 current，`pnpm vrt compare`。」
+3. 打開報告：指出 **diff 百分比／區塊數**。
+4. 點一個 **紅框**，唸出 RCA：哪個選擇器、哪個 `backgroundColor` 從什麼變什麼。
+5. 按 `**→`** 切到下一個區塊，強調「**不用自己找座標**」。
 
-若環境無法跑 Playwright，改用 **`pnpm dev:fixtures`** 再走 compare，口頭交代「fixture 模仿典型 nav／CTA 變色案例」。
+若環境無法跑 Playwright，改用 `**pnpm dev:fixtures`** 再走 compare，口頭交代「fixture 模仿典型 nav／CTA 變色案例」。
 
 ---
 
 ## 檔案與進一步閱讀（repo 內）
 
-| 檔案 | 用途 |
-|------|------|
-| `README.md` | 架構、CLI、RCA 演算法細節、除錯 |
-| `TUTORIAL.md` | 中文手把手教學 |
-| `PLAN.md` | 兩日切割、範圍對照、mermaid 架構 |
-| `vrt.config.ts` | 專案可調參數 |
-| `src/sdk/`、`src/engine/`、`src/report/` | 實作主目錄 |
+
+| 檔案                                     | 用途                   |
+| -------------------------------------- | -------------------- |
+| `README.md`                            | 架構、CLI、RCA 演算法細節、除錯  |
+| `TUTORIAL.md`                          | 中文手把手教學              |
+| `PLAN.md`                              | 兩日切割、範圍對照、mermaid 架構 |
+| `vrt.config.ts`                        | 專案可調參數               |
+| `src/sdk/`、`src/engine/`、`src/report/` | 實作主目錄                |
+
 
 ---
 
