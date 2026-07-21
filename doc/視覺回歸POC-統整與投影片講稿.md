@@ -229,8 +229,3 @@
 | `PLAN.md`                              | 兩日切割、範圍對照、mermaid 架構 |
 | `vrt.config.ts`                        | 專案可調參數               |
 | `src/sdk/`、`src/engine/`、`src/report/` | 實作主目錄                |
-
-
----
-
-*本稿依專案內 `README.md`、`TUTORIAL.md`、`PLAN.md`、`package.json`、`vrt.config.ts` 等現況整理；若程式後續有迭代，發表前請對照 repo 最新行為微調講稿中的指令與限制描述。*

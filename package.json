@@ -13,6 +13,10 @@
     "demo:baseline": "VRT_TARGET=baseline VRT_DEMO_VERSION=v1 pnpm test:demo",
     "demo:current": "VRT_TARGET=current VRT_DEMO_VERSION=v2 pnpm test:demo",
     "demo": "pnpm demo:baseline && pnpm demo:current && pnpm vrt compare --open",
+    "test:joie": "playwright test --config=playwright.joie.config.ts",
+    "joie:baseline": "VRT_TARGET=baseline pnpm test:joie",
+    "joie:current": "VRT_TARGET=current pnpm test:joie",
+    "joie": "pnpm joie:baseline && pnpm joie:current && pnpm vrt compare --open",
     "dev:fixtures": "tsx src/dev/makeFixtures.ts",
     "dev:fixtures:compare": "pnpm dev:fixtures && pnpm vrt compare --open",
     "typecheck": "tsc --noEmit"
