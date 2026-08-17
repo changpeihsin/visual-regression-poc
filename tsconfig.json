@@ -13,5 +13,11 @@
     "lib": ["ES2022", "DOM"],
     "types": ["node"]
   },
-  "include": ["src/**/*", "demo/**/*", "vrt.config.ts", "playwright.config.ts"]
+  "include": [
+    "src/**/*",
+    "demo/**/*",
+    "vrt.config.ts",
+    "playwright.config.ts",
+    "playwright.e2e.config.ts"
+  ]
 }

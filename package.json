@@ -11,6 +11,8 @@
     "vrt": "tsx src/cli.ts",
     "e2e:dev": "tsx watch src/e2e/server.ts",
     "e2e:start": "tsx src/e2e/server.ts",
+    "test:e2e:unit": "tsx --test \"src/e2e/**/*.test.ts\"",
+    "test:e2e:pdp-preselect": "playwright test --config=playwright.e2e.config.ts preselect.spec.ts",
     "test:demo": "playwright test --config=playwright.config.ts",
     "demo:baseline": "VRT_TARGET=baseline VRT_DEMO_VERSION=v1 pnpm test:demo",
     "demo:current": "VRT_TARGET=current VRT_DEMO_VERSION=v2 pnpm test:demo",
