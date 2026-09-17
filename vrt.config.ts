@@ -6,7 +6,9 @@ export type VrtConfig = {
 };
 
 const config: VrtConfig = {
-  viewports: [{ width: 1280, height: 720 }],
+  // Empty = takeSnapshot uses each Playwright project's own viewport
+  // (so mobile devices get their real mobile size instead of an override).
+  viewports: [],
 
   excludeSelectors: ["#clock", ".carousel", "[data-vrt-ignore]"],
 

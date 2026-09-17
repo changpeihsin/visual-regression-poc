@@ -1,4 +1,14 @@
-import { defineConfig } from "@playwright/test";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { defineConfig, devices } from "@playwright/test";
+import { config as loadEnv } from "dotenv";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+loadEnv({ path: path.resolve(__dirname, "joie/.env") });
+
+const baseURL = process.env.BASE_URL ?? "https://joiebaby.dev";
 
 export default defineConfig({
   testDir: "./joie/tests",
@@ -6,13 +16,14 @@ export default defineConfig({
   workers: 1,
   reporter: "list",
   use: {
+    baseURL,
     headless: true,
     ignoreHTTPSErrors: true,
   },
   projects: [
-    {
-      name: "chromium",
-      use: { browserName: "chromium", channel: "chromium" },
-    },
+    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
+    { name: "mobile", use: { ...devices["Pixel 5"] } },
+    { name: "safari", use: { ...devices["Desktop Safari"] } },
+    { name: "mobile-safari", use: { ...devices["iPhone 13"] } },
   ],
 });
